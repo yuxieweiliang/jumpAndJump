@@ -17,11 +17,33 @@ export default class GamePage {
     this.addInitBlock()
     this.addGround()
     this.addBottle()
+    this.bindTouchEvent()
     this.render()
+  }
+
+  bindTouchEvent () {
+    canvas.addEventListener('touchstart', this.touchStart)
+    canvas.addEventListener('touchend', this.touchEnd)
+  }
+
+  removeTouchEvent () {
+    canvas.removeEventListener('touchstart', this.touchStart)
+    canvas.removeEventListener('touchend', this.touchEnd)
+  }
+
+  touchStart () {
+    console.log('touch start callback')
+  }
+
+  touchEnd () {
+    console.log('touch end callback')
   }
 
   render () {
     this.scene.render()
+    if (this.bottle) {
+      this.bottle.update()
+    }
     requestAnimationFrame(this.render.bind(this))
   }
   addInitBlock () {
@@ -38,6 +60,7 @@ export default class GamePage {
   addBottle () {
     console.log('game bottle restart')
     this.scene.instance.add(this.bottle.obj)
+    this.bottle.showUp()
   }
   restart () {
     console.log('game page restart')

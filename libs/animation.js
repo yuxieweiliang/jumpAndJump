@@ -2,7 +2,6 @@ import Tween from './tween'
 var animationId = -1
 var killAnimationId = animationId - 1
 
-
 var customAnimation = exports.customAnimation = {};
 customAnimation.to = function (obj, duration, options) {
     duration *= 1000;

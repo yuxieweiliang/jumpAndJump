@@ -20,7 +20,7 @@ class Bottle_push {
     this.loader = new THREE.TextureLoader()
     this.obj = new THREE.Object3D()
     this.obj.name = 'bottle'
-    this.obj.position.set(bottleConf.initPosition.x, bottleConf.initPosition.y + 5, bottleConf.initPosition.z)
+    this.obj.position.set(bottleConf.initPosition.x, bottleConf.initPosition.y + 30, bottleConf.initPosition.z)
 
     this.bottle = new THREE.Object3D()
     var basicMaterial = new THREE.MeshBasicMaterial({ color: 0x800080 })
@@ -63,6 +63,32 @@ class Bottle_push {
     this.obj.add(this.bottle)
   }
 
+  // 头部旋转
+  update () {
+    this.head.rotation.y += 0.06
+  }
+
+  showUp () {
+    customAnimation.to(this.obj.position, 0.5, {
+      x: bottleConf.initPosition.x,
+      y: bottleConf.initPosition.y + 5,
+      z: bottleConf.initPosition.z
+    }, 'Bounce.easeInOut')
+  }
+
+  setDirection (direction, axis) {
+    this.direction = direction
+    this.axis = axis
+  }
+
+  rotate () {
+    if (this.direction === 0) {
+      customAnimation.to(this.human.rotation, 0.14, {z: this.human.rotation.z - 180})
+      customAnimation.to(this.human.rotation, 0.18, {z: this.human.rotation.z - 2 * Math.PI}, 'Linear', 0.14)
+    } else if (this.direction === 1) {
+
+    }
+  }
 }
 
 export default new Bottle_push()
